@@ -52,7 +52,7 @@ def receive_message(sock_client):
                 f.write(filedata)
 
         else:
-            print(data.decode('utf-8'))
+            print(f"\r{message}\n----------\n>> ", end='')
 
 def main():
     username = input('Set username: ').strip().lstrip('_').replace('|', '')

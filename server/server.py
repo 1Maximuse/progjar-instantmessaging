@@ -5,6 +5,7 @@ from threading import Thread
 address = ('0.0.0.0', 6666)
 
 def send_broadcast(clients, friends, formatted_message, username_sender):
+    formatted_message = "_bcast|" + formatted_message
     for username in clients.keys():
         if username == username_sender:
             continue
@@ -13,6 +14,7 @@ def send_broadcast(clients, friends, formatted_message, username_sender):
 
 def send_message(friends, sock_sender, sock_destination, username, destination, formatted_message):
     if (username, destination) in friends and (destination, username) in friends:
+        formatted_message = f"{username}|" +formatted_message
         sock_destination.send(formatted_message.encode('utf-8'))
     else:
         sock_sender.send(f'_notfriends|{destination}'.encode('utf-8'))
